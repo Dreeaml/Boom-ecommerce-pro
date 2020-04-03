@@ -6,78 +6,114 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Ecommerce</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/cerulean/bootstrap.min.css">
+    <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/flatly/bootstrap.min.css">-->
     <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    {% block head_js %}
-    {% endblock head_js %}
-</head>
-<body>
-    <nav class="navbar navbar-masthead navbar-default navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="/">Ecommerce</a>
-            </div>
-            <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    {% if user.is_authenticated %}
-                        <li><a href="{% url 'user_profile' %}"><i class="fa fa-user"></i>Profile</a></li>
-                        <li><a href="{% url 'logout' %}"><i class="fa-sign-out"></i>Log Out</a></li>
-                    {%  else %}
-                        <li><a href="{% url 'registration' %}"><i class="fa-user-plus"></i>Register</a></li>
-                        <li><a href="{% url 'login' %}"><i class="fa fa-sign-in"></i>Log In</a></li>
-                    {% endif %}
-                    <li>
-                        <a href="{% url 'view_cart' %}">
-                            <i class="fa fa-shipping-cart"></i>Cart
-                            {% if product_count > 0 %}
-                            <label class="badge badge-warning">{{ product_count }}</label>
-                            {% endif %}
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <div class="container">
-        <h1>
-            {% block page_heading %}{% endblock %}
-        </h1>
 
-        {% if messages %}
-            <div class="alert alert-success">
-                <div class="messages">
-                    {% for message in messages %}
-                        {{ message }}
-                    {% endfor %}
+    <!-- Bootstrap Core CSS -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/animate.css' %}" rel="stylesheet">
+    <link href="{% static 'css/plugins.css' %}" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="{% static 'css/pe-icons.css' %}" rel="stylesheet">
+
+</head>
+<body id="page-top" class="regular-navigation">
+    <div class="master-wrapper">
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-fixed-top fadeInDown" data-wow-delay="0.2s">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header page-scroll">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navigation">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand smoothie" href="/">BOoM</a>
+                </div>        
+            
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse " id="main-navigation">
+                   
+                    <!--Items--> 
+                    <ul class="nav navbar-nav navbar-right ">
+                        {% if user.is_authenticated %}
+                        <li><a class="page-scroll" href="{% url 'user_profile' %}">Profile</a></li>
+                        <li><a class="page-scroll" href="{% url 'logout' %}">Log Out</a></li>
+                        {%  else %}
+                        <li><a class="page-scroll" href="{% url 'registration' %}"> Register </a></li>
+                        <li><a class="page-scroll" href="{% url 'login' %}">Log In</a></li>
+                        {% endif %}
+                        <li>
+                            <a class="page-scroll" href="{% url 'view_cart' %}">
+                                <i class="fa fa-shipping-cart"></i>Cart
+                                {% if product_count > 0 %}
+                                <label class="badge badge-warning">{{ product_count }}</label>
+                                {% endif %}
+                            </a>
+                        </li> 
+                    </ul>
+
+                    <!--Search in Navbar-->
+                    <ul class="nav navbar-nav navbar-center">
+                        <form class="form-inline" action="{% url 'search' %}" method="GET">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search" name="search">
+                                <div class="input-group-btn">
+                                <button class="btn btn-default" type="search">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                                </div>
+                            </div>
+                        </form>
+                    </ul>
+                </div>      
+            </div>
+        </nav>
+    </div>
+    
+    {% block content %} {% endblock %}
+
+        <footer class="white-wrapper">
+            <div class="container-fluid">
+                <div class="row text-center">
+                    <div class="col-md-12 wow fadeIn mb30" data-wow-delay="0.2s">
+                        <span class="copyright">Copyright 2020. Designed by ANDREA </span>
+                    </div>
+                    <div class="col-md-12">
+                        <ul class="list-inline social-links wow fadeIn" data-wow-delay="0.2s">
+                            <li>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-pinterest"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-dribbble"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-behance"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-linkedin"></i></a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        {% endif %}
-
-        <div class="container">
-            <div class="display">
-                <form action="{% url 'search' %}" method="get">
-                    <input type="text" name="q">
-                    <button type="search">Search</button>
-                </form>
-            </div>
-        </div>
-        {% block content %} {% endblock %}
-    </div>
-
-    <footer>
-        <div class="container">
-            <p>Made by Andrea</p>
-        </div>
-    </footer>
+        </footer>
+    <!--JS imports-->
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/plugins.js' %}"></script>
+    <script src="{% static 'js/init.js' %}"></script>
 </body>
-
 </html>
