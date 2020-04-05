@@ -21,7 +21,7 @@
     {% endblock head_js %}
 
 </head>
-<body id="page-top" class="regular-navigation">
+    <body >
     <div class="master-wrapper">
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-fixed-top fadeInDown" data-wow-delay="0.2s">
@@ -42,16 +42,35 @@
                    
                     <!--Items--> 
                     <ul class="nav navbar-nav navbar-right ">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">Categories <span class="fa fa-caret-down"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Women</a></li>
+                                <li><a href="#">Men</a></li>
+                                <li><a href="#">Couples</a></li>
+                            </ul>
+                        </li>
                         {% if user.is_authenticated %}
-                        <li><a class="page-scroll" href="{% url 'user_profile' %}">Profile</a></li>
-                        <li><a class="page-scroll" href="{% url 'logout' %}">Log Out</a></li>
+                        <li>
+                            <a class="page-scroll" href="{% url 'user_profile' %}">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="{% url 'logout' %}">
+                                Log Out
+                            </a>
+                        </li>
                         {%  else %}
-                        <li><a class="page-scroll" href="{% url 'registration' %}"> Register </a></li>
-                        <li><a class="page-scroll" href="{% url 'login' %}">Log In</a></li>
+                        <li>
+                            <a class="page-scroll" href="{% url 'login' %}">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                            </a>
+                        </li>
                         {% endif %}
                         <li>
                             <a class="page-scroll" href="{% url 'view_cart' %}">
-                                <i class="fa fa-shipping-cart"></i>Cart
+                                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                 {% if product_count > 0 %}
                                 <label class="badge badge-warning">{{ product_count }}</label>
                                 {% endif %}
@@ -76,8 +95,10 @@
             </div>
         </nav>
     </div>
-    
-    {% block content %} {% endblock %}
+
+    <div class="container body-panel" style="margin-top:4%; width: 100%;">
+        {% block content %} {% endblock %}
+    </div>
 
     <footer class="white-wrapper">
         <div class="container-fluid">
@@ -110,10 +131,16 @@
             </div>
         </div>
     </footer>
-    <!--JS imports
+    <!--JS imports-->
     <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/plugins.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/init.js' %}"></script>-->
+    <script type="text/javascript" src="{% static 'js/init.js' %}"></script>
+
+    <script>
+        $('.carousel').carousel({
+        interval: 2000
+        }) 
+    </script>
 </body>
 </html>

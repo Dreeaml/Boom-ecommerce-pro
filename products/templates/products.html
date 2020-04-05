@@ -2,8 +2,33 @@
 {% extends 'base.html' %} 
 
 {% block content %}
+<!-- Carousel 100% Fullscreen -->
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img src="media/images/bg/bg2.jpg" style="width:100%"  alt="...">
+                </div>
+
+                <div class="item">
+                    <img src="media/images/bg/bg2.jpg"  style="width:100%" alt="...">
+                </div>
+                
+                <div class="item">
+                    <img src="media/images/bg/bg2.jpg"  style="width:100%" alt="...">
+                </div>
+            </div>
+
+            <!-- Left and right controls -->
+            <a class="left carousel-control" href="#myCarousel" data-slide="prev"></a>
+            <a class="right carousel-control" href="#myCarousel" data-slide="next"></a>
+            
+        </div>
     {% for product in products %}
-        <div class="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-6 col-md-4 display panel panel-default">
+    <div class="container-fluid products-container">
+        <h2>New Releases</h2>
+        <div class="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-6 col-md-4 panel panel-default">
             <div class="panel-body">
                 <div class="product" style="background-image: url('{{ MEDIA_URL }}{{ product.image }}')"></div>
 
@@ -22,6 +47,20 @@
                 </form>
             </div>
         </div>
+    </div>
+    <div class="container-fluid" style="background-color:#dedee2; padding:30px">
+        <div class="row">
+            <div class="col-sm-4" style="background-color:white;">
+                <p>STUDENT DISCOUNT</p>
+            </div>
+            <div class="col-sm-4" style="background-color:white;">
+                <p>KLARNA</p>
+            </div>
+            <div class="col-sm-4" style="background-color:white;">
+                <p>HOME WORKOUT - APP</p>
+            </div>
+        </div>
+    </div>
     {% endfor %}
 {% endblock %}
 
