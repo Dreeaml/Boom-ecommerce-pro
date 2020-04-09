@@ -31,30 +31,40 @@
             <a class="right carousel-control" href="#myCarousel" data-slide="next"></a>
             
     </div>
-    
-    <div class="container-fluid products-container">
-        <h2>New Releases</h2>
-        {% for product in products %}
-        <div class="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-6 col-md-4 panel panel-default">
-            <div class="panel-body">
-                <div class="product" style="background-image: url('{{ MEDIA_URL }}{{ product.image }}')"></div>
-                <h3>{{ product.name }}</h3>
-                <p class="product-description">{{ product.description }}</p>
-                <p>{{ product.price }}</p>
 
-                <form method="post" action="{% url 'add_to_cart' product.id %}">
-                    {% csrf_token %}
-                    <div class="input-group">
-                        <input name="quantity" type="number" min="1" max="999" class="form-control" placeholder="Quantity">
-                        <span class="input-group-btn">
-                            <button class="btn btn-success" type="submit">Add</button>
-                        </span>
+    <div class="container">
+        <h2>New Releases</h2>
+        <div class="card" > 
+            {%  for product in products  %}
+            <div class="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-6 col-md-4 panel panel-display">
+
+                <img class="card-img-top"  src="{{ MEDIA_URL }}{{ item.product.image }}" width="362px" height="180px"  alt="" /> 
+
+                <div class="card-body">
+                
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="product-description">{{ product.description }}</p>
+                    <p>{{ item.product.price }}</p>                  
+                        <form method="post" action="{% url 'add_to_cart' product.id %}">
+                            {% csrf_token %}
+                            <div class="input-group">
+                                <input name="quantity" type="number" min="1" max="999" class="form-control" placeholder="Quantity">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-success" type="submit">Add</button>
+                                </span>
+                            </div>
+                        </form>
+                    <div class="card-footer">
+                        <small class="text-muted">Last updated 3 mins ago</small>
                     </div>
-                </form>
+
+                </div>            
             </div>
+            {% endfor %}
         </div>
-        {% endfor %}
     </div>
+
+   
     
     <div class="container-fluid" style="background-color:#85858521; padding:30px">
         <div class="row">
