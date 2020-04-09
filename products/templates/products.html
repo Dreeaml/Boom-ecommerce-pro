@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 {% extends 'base.html' %} 
+{% load static %}
+
 
 {% block content %}
 <!-- Carousel 100% Fullscreen -->
@@ -8,23 +10,19 @@
             <!-- Wrapper for slides -->
             <div class="carousel-inner">
                 <div class="item active">
-                    <img src="assets/images/carousel/img1.jpeg" style="width:100%"  alt="...">
+                    <img src="{% static 'img/carousel/adv_1.jpeg' %}" style="width:100%"  alt="First slide">
                 </div>
-
                 <div class="item">
-                    <img src="assets/images/carousel/img2.jpeg"  style="width:100%" alt="...">
+                    <img src="{% static 'img/carousel/adv_2.jpeg' %}"  style="width:100%" alt="Second slide">
                 </div>
-                
                 <div class="item">
-                    <img src="assets/images/carousel/img3.jpeg"  style="width:100%" alt="...">
+                    <img src="{% static 'img/carousel/adv_3.jpeg' %}"  style="width:100%" alt="Thrid slide">
                 </div>
-
                 <div class="item">
-                    <img src="assets/images/carousel/img4.jpg"  style="width:100%" alt="...">
+                    <img src="{% static 'img/carousel/adv_4.jpg' %}"  style="width:100%" alt="Fourth slide">
                 </div>
-
                 <div class="item">
-                    <img src="assets/images/carousel/img5.jpeg" style="width:100%" alt="...">
+                    <img src="{% static 'img/carousel/adv_5.jpeg' %}" style="width:100%" alt="Fifth slide">
                 </div>
             </div>
 
@@ -60,15 +58,29 @@
     
     <div class="container-fluid" style="background-color:#85858521; padding:30px">
         <div class="row">
-            <div class="col-sm-4" style="background-color:white;">
-                <p>STUDENT DISCOUNT</p>
+            <div class="column">
+                <div class="box ">
+                    <img src="{% static 'img/offers/1.jpeg' %}" style= "max-width: 100%; max-height: 100%;">
+                    
+                    <h4 style="background-color: #bcbcbc; padding: 8px;"><a href="#" style="color:white;">STUDENT DISCOUNT</a></h4>
+                </div>
             </div>
-            <div class="col-sm-4" style="background-color:white;">
-                <p>KLARNA</p>
+
+            <div class="column">
+                <div class="box">
+                <img src="{% static 'img/offers/3.jpeg' %}" style="max-width: 100%; max-height: 100%;">
+
+                <h4 style="background-color: #bcbcbc; padding: 8px;"><a href="#" style="color:white;">KLARNA</a></h4>
+                </div>
             </div>
-            <div class="col-sm-4" style="background-color:white;">
-                <p>HOME WORKOUT - APP</p>
-            </div>
+            
+            <div class="column">
+                <div class="box">
+                    <img src="{% static 'img/offers/2.jpeg' %}" style="max-width: 100%; max-height: 100%;">
+
+                    <h4 style="background-color: #bcbcbc; padding: 8px;"><a href="#" style="color:white;">HOME WORKOUT - APP</a></h4>
+                </div>
+            </div> 
         </div>
     </div>
 {% endblock %}
