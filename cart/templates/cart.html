@@ -5,14 +5,14 @@
 
 {% block content %}
 <div class="container">
-    <div class="card" > 
-        {% for item in cart_items %}
-         <div class="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-6 col-md-4 panel panel-display">
+    {% for item in cart_items %}
+    <div class="col-sm-6 col-lg-3">
+        <div class="card" >
 
-            <img class="card-img-top"  src="{{ MEDIA_URL }}{{ item.product.image }}" width="362px" height="180px"  alt="" /> 
+            <img class="card-img-top"  src="{{ MEDIA_URL }}{{ item.product.image }}" width="260px" height="180px" alt="" /> 
 
             <div class="card-body">
-            
+        
                 <h5 class="card-title">{{ item.product.name }}</h5>
                 <p>{{ item.product.price }}</p>
                 <p>
@@ -34,10 +34,10 @@
                     <small class="text-muted">Last updated 3 mins ago</small>
                 </div>
 
-            </div>            
-        </div>
-        {% endfor %}
+            </div> 
+        </div>           
     </div>
+    {% endfor %}
  </div>
 
 <div class="jumbotron jumbotron-fluid">

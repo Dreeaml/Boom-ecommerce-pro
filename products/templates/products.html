@@ -31,20 +31,24 @@
             <a class="right carousel-control" href="#myCarousel" data-slide="next"></a>
             
     </div>
-
+<!-- Products -->
     <div class="container">
         <h2>New Releases</h2>
-        <div class="card" > 
-            {%  for product in products  %}
-            <div class="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-6 col-md-4 panel panel-display">
+        
+        {%  for product in products  %}
+            <div class="col-sm-6 col-lg-3">
+                <div class="card" >
+                    <img class="card-img-top"  src="{{ MEDIA_URL }}{{ product.image }}" width="260px" height="180px" alt="" /> 
 
-                <img class="card-img-top"  src="{{ MEDIA_URL }}{{ item.product.image }}" width="362px" height="180px"  alt="" /> 
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <div class="product-description">
+                            <div id = "product-description">{{ product.description }}</div>
+                        
+                            <button id ="readmore_btn" value="True">Show more<i class="fa fa-chevron-down" aria-hidden="true" ></i></button>
+                        </div>
 
-                <div class="card-body">
-                
-                    <h5 class="card-title">{{ product.name }}</h5>
-                    <p class="product-description">{{ product.description }}</p>
-                    <p>{{ item.product.price }}</p>                  
+                        <p>{{ item.product.price }}</p>                  
                         <form method="post" action="{% url 'add_to_cart' product.id %}">
                             {% csrf_token %}
                             <div class="input-group">
@@ -54,18 +58,16 @@
                                 </span>
                             </div>
                         </form>
-                    <div class="card-footer">
-                        <small class="text-muted">Last updated 3 mins ago</small>
-                    </div>
 
-                </div>            
+                        <div class="card-footer">
+                            <small class="text-muted">Last updated 3 mins ago</small>
+                        </div>
+                    </div>            
+                </div>
             </div>
-            {% endfor %}
-        </div>
+        {% endfor %}    
     </div>
-
-   
-    
+<!-- Offers -->
     <div class="container-fluid" style="background-color:#85858521; padding:30px">
         <div class="row">
             <div class="column">
@@ -93,5 +95,6 @@
             </div> 
         </div>
     </div>
+
 {% endblock %}
 
