@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
-import env
 import dj_database_url
 
 
@@ -28,7 +27,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['8080-e682ad67-7e2b-4861-936a-5bcc6d23827a.ws-eu01.gitpod.io', 'localhost', 'boom-ecommerce.herokuapp.com']
+ALLOWED_HOSTS = ['8080-e682ad67-7e2b-4861-936a-5bcc6d23827a.ws-eu01.gitpod.io', '8080-f19c979a-c262-4c53-aca5-4e97aed76e87.ws-eu01.gitpod.io' ,'localhost', 'boom-ecommerce.herokuapp.com']
 
 
 # Application definition
@@ -47,6 +46,7 @@ INSTALLED_APPS = [
     'search',
     'checkout',
     'storages',
+    'contact_us',
 ]
 
 MIDDLEWARE = [
@@ -167,5 +167,14 @@ MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
 STRIPE_PUBLISHABLE = os.getenv('STRIPE_PUBLISHABLE')
 STRIPE_SECRET = os.getenv('STRIPE_SECRET')
 
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"

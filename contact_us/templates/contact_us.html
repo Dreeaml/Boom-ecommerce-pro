@@ -10,19 +10,13 @@
             <div class="panel panel-default">
               <div class="panel-body">
                 <div class="text-center">
-                  <h2 class="text-center">User Login</h2>
+                  <h2 class="text-center">Contact Us</h2>
                   <div class="panel-body">
-    
-                    <form method="POST">  
+                    <form method="POST">
                         {% csrf_token %}
-                        {{login_form | as_bootstrap}}
-                        <button type="submit" class="btn btn-default">Login</button>
+                        {{ form | as_bootstrap }}
+                        <button type="submit" class="btn btn-default">Submit</button>
                     </form>
-                    <br>
-                    <p><a href="{% url 'password_reset' %}">I've forgotten my password </a></p>
-
-                    <p>New to Boom? <a class="page-scroll" href="{% url 'registration' %}"> Join us! </a></p>
-    
                   </div>
                 </div>
               </div>
@@ -30,5 +24,4 @@
         </div>
 	</div>
 </div>
-
-{% endblock%}
+{% endblock %}
