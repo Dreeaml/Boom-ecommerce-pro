@@ -43,10 +43,10 @@
                             <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">Categories <span class="fa fa-caret-down"></span></a>
                             <ul class="dropdown-menu" role="menu">
 
-                                <li><a href="#" >Women</a></li>
-                                <li><a href="#" >Men</a></li>
-                                <li><a href="#" >Team</a></li>
-                                <li><a href="#" >Accesories</a></li>
+                                <li><a href="{% url 'all_products' category='women' %}">Women</a></li>
+                                <li><a href="{% url 'all_products' category='men' %}" >Men</a></li>
+                                <li><a href="{% url 'all_products' category='team' %}" >Team</a></li>
+                                <li><a href="{% url 'all_products' category='accesories' %}" >Accesories</a></li>
                             </ul>
                         </li>
                         {% if user.is_authenticated %}
@@ -115,7 +115,9 @@
                 <span class="sr-only">Next</span>
             </a>
         </div>
-        {% block content %} {% endblock %}
+        {% block content %} 
+            
+        {% endblock %}
         <div class="push"></div>
     </div>
 
@@ -129,10 +131,10 @@
                 <div class="col-sm-2">
                     <h5>Products</h5>
                     <ul>
-                        <li><a href="#">Women</a></li>
-                        <li><a href="#">Men</a></li>
-                        <li><a href="#">Team</a></li>
-						<li><a href="#">Accesories</a></li>
+                        <li><a href="{% url 'all_products' category='women' %}">Women</a></li>
+                        <li><a href="{% url 'all_products' category='men' %}">Men</a></li>
+                        <li><a href="{% url 'all_products' category='team' %}">Team</a></li>
+                        <li><a href="{% url 'all_products' category='accesories' %}">Accesories</a></li>
                     </ul>
                 </div>
                 <div class="col-sm-2">
@@ -140,7 +142,7 @@
                     <ul>
                         <li><a href="#">Size Guides</a></li>
                         <li><a href="https://mecenat.com/se" target="_blank">Student Discount</a></li>
-                        <li><a href="{% url 'contact_us' %}">Help</a></li>
+                       <li><a href="#">FAQ</a></li>
                     </ul>
                 </div>
                 <div class="col-sm-2">
@@ -148,6 +150,7 @@
                     <ul>
                         <li><a href="https://www.greatbigminds.com/category/Life/" target="_blank">Motivation</a></li>
                         <li><a href="https://runningonrealfood.com/" target="_blank">Nutrition</a></li>
+                         <li><a href="{% url 'contact_us' %}">Help</a></li>
                     </ul>
                 </div>
                 <div class="col-sm-3">
@@ -174,7 +177,6 @@
     <!--JS imports-->
     <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
-    <!--<script type="text/javascript" src="{% static 'js/init.js' %}"></script> -->
 
     <script>
     $(document).ready(function() {
