@@ -1,53 +1,64 @@
 <!DOCTYPE html>
 {% extends 'base.html' %} 
 {% load static %}
-
-{% block content %}  
-    <div class="container">
-		<div class="card">
-			<div class="container-fliud">
-				<div class="wrapper row">
-					<div class="preview col-md-6">
-						
-						<div class="preview-pic tab-content">
-						  <div class="tab-pane active" id="pic-1"><img class="card-img-top" src="{{ MEDIA_URL }}{{ product.image }}" /></div>
+ 
+    <div class="container single_product_container">
+        {% block content %} 
+		<div class="row">
+			<div class="col-lg-7">
+				<div class="single_product_pics">
+					<div class="row">
+						<div class="col-lg-3 thumbnails_col order-lg-1 order-2">
+							<div class="single_product_thumbnails">
+								<ul>
+									<li><img src="{{ MEDIA_URL }}{{ product.image }}" alt="" data-image="{{ MEDIA_URL }}{{ product.image }}1.jpg"></li>
+									<li class="active"><img src="{{ MEDIA_URL }}{{ product.image }}" alt="" data-image="{{ MEDIA_URL }}{{ product.image }}2.jpg"></li>
+									<li><img src="{{ MEDIA_URL }}{{ product.image }}" alt="" data-image="{{ MEDIA_URL }}{{ product.image }}3.jpg"></li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-lg-9 image_col order-lg-2 order-1">
+							<div class="single_product_image">
+								<div class="single_product_image_background">
+                                    <img class="card-img-top" src="{{ MEDIA_URL }}{{ product.image }}" />
+                                </div>
+							</div>
 						</div>
 					</div>
-					<div class="details col-md-6">
-						<h3 class="product-title">{{ product.name }}</h3>
-						<div class="rating">
-							<div class="stars">
-								<span class="fa fa-star checked"></span>
-								<span class="fa fa-star checked"></span>
-								<span class="fa fa-star checked"></span>
-								<span class="fa fa-star"></span>
-								<span class="fa fa-star"></span>
-							</div>
-							<span class="review-no">41 reviews</span>
-						</div>
-						<p class="product-description">{{ product.description }}</p>
-						<h4 class="price">price: {{ product.price }}</h4>
-						<h5 class="sizes">sizes:
-							<span class="size" data-toggle="tooltip" title="small">s</span>
-							<span class="size" data-toggle="tooltip" title="medium">m</span>
-							<span class="size" data-toggle="tooltip" title="large">l</span>
-							<span class="size" data-toggle="tooltip" title="xtra large">xl</span>
-						</h5>
-						<div class="action">
-                            <form method="post" action="{% url 'add_to_cart' product.id %}">
-                                {% csrf_token %}
-                                <div class="input-group">
-                                    <input name="quantity" type="number" min="1" max="999" class="form-control" placeholder="Quantity">
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-success" type="submit">Add to cart</button>
-                                    </span>
-                                </div>
-                            </form>
-						</div>
-                        
+				</div>
+			</div>
+			<div class="col-lg-5">
+				<div class="product_details">
+					<div class="product_details_title">
+						<h2>{{ product.name }}</h2>
+						<p>{{ product.description }}</p>
+					</div>
+					<div class="free_delivery d-flex flex-row align-items-center justify-content-center">
+						<span class="ti-truck"></span><span>free delivery</span>
+					</div>
+					<div class="original_price">$99.00</div>
+					<div class="product_price">{{ product.price }}</div>
+					<ul class="star_rating">
+						<li><i class="fa fa-star" aria-hidden="true"></i></li>
+						<li><i class="fa fa-star" aria-hidden="true"></i></li>
+						<li><i class="fa fa-star" aria-hidden="true"></i></li>
+						<li><i class="fa fa-star" aria-hidden="true"></i></li>
+						<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+					</ul>
+					<div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
+                        <form method="post" action="{% url 'add_to_cart' product.id %}">
+                            {% csrf_token %}
+                            <div class="input-group">
+                                <input name="quantity" type="number" min="1" max="999" class="form-control" placeholder="Quantity">
+                                <span class="input-group-btn">
+                                    <button class="red_button add_to_cart_button" type="submit">Add to cart</button>
+                                </span>
+                            </div>
+                        </form>
+                        <div class="product_favorite d-flex flex-column align-items-center justify-content-center"></div>
 					</div>
 				</div>
 			</div>
 		</div>
+        {% endblock %}
 	</div>
-{% endblock %}
