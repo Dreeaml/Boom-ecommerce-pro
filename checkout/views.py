@@ -7,7 +7,7 @@ import stripe
 
 
 # Create your views here.
-endpoint_secret = settings.endpoint_secret
+endpoint_secret = settings.ENDPOINT_SECRET
 
 @login_required()
 def checkout(request):
@@ -20,21 +20,22 @@ def checkout(request):
         product = get_object_or_404(Product, pk=id)
         line_items.append({
             'name' : product.name,
-            'amount': 1099,
+            'amount': int(product.price * 100),
             'currency' : 'sek',
             'quantity' : cart[id]['quantity']
         })
-      
+
     session = stripe.checkout.Session.create(
         payment_method_types=['card'],
         line_items=line_items,
         success_url=request.build_absolute_uri(reverse(checkout_success)),
         cancel_url=request.build_absolute_uri(reverse(checkout_cancelled)),
     )
+    print('shopping_cart')
     print(settings.STRIPE_PUBLISHABLE)  
     return render(request, 'checkout.html',
         {'session_id' : session.id,
-        'public_key' : settings.STRIPE_PUBLISHABLE
+        'public_key' : settings.STRIPE_PUBLISHABLE,
     })
 
 @login_required
@@ -45,38 +46,7 @@ def checkout_success(request):
 @login_required
 def checkout_cancelled(request):
     all_products = Product.objects.all()
-    min_price=1
-    max_price=99
     
     return render(request, 'all_products.html', {
-        'all_products':all_products,
-        'min_price':min_price,
-        'max_price':max_price
+        'all_products':all_products
     })
-  
-  
-@login_required   
-@csrf_exempt
-def payment_completed(request):
-    payload = request.body
-    sig_header = request.META['HTTP_STRIPE_SIGNATURE']
-    event = None
-    
-    try:
-        event = stripe.Webhook.construct_event(
-            payload, sig_header, endpoint_secret
-        )
-    except ValueError as e:
-        return HttpResponse(status=400)
-    except stripe.error.SignatureVerificationError as e:
-        return HttpResponse(status=400)
-        
-    if event['type'] == 'checkout.session.completed':
-        session =event['data']['object']
-        
-        handle_checkout_session(session)
-    
-    return HttpResponse(status=200)
-
-def handle_checkout_session(session):
-     print(session)

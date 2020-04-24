@@ -34,6 +34,7 @@ ALLOWED_HOSTS = ['8080-e682ad67-7e2b-4861-936a-5bcc6d23827a.ws-eu01.gitpod.io', 
 # Application definition
 
 INSTALLED_APPS = [
+    'sendemail.apps.SendemailConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -47,7 +48,6 @@ INSTALLED_APPS = [
     'search',
     'checkout',
     'storages',
-    'contact_us',
 ]
 
 MIDDLEWARE = [
@@ -167,16 +167,17 @@ MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
 
 STRIPE_PUBLISHABLE = os.getenv('STRIPE_PUBLISHABLE')
 STRIPE_SECRET = os.getenv('STRIPE_SECRET')
-endpoint_secret = os.getenv('endpoint_secret')
-
-
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
+ENDPOINT_SECRET = os.getenv('endpoint_secret')
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_USE_TLS = False
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'boomentrepreneurship@gmail.com'
+EMAIL_HOST_PASSWORD = 'BoomLuces*'
+
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
