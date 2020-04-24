@@ -6,10 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Ecommerce</title>
-    <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.min.css' %}" type="text/css" />
+    
 
     <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.min.css' %}" type="text/css" />
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}">
     <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
     <link rel="stylesheet" href="{% static 'css/single_responsive.css' %}">
     <link rel="stylesheet" href="{% static 'css/single_styles.css' %}">
@@ -20,6 +22,8 @@
 
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="{% static 'css/animate.css' %}" rel="stylesheet">
+
+
 
     {% block head_js %}
     {% endblock head_js %}
@@ -43,7 +47,7 @@
     -->
     <header class="header trans_300">
 
-		<!-- Top Navigation -->
+		<!-- Top Navigation 
 		<div class="top_nav">
             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
@@ -67,7 +71,7 @@
                     <span class="sr-only">Next</span>
                 </a>
             </div>
-		</div>
+		</div>-->
         
 		<!-- Main Navigation -->
 		<div class="main_nav_container">
@@ -104,9 +108,7 @@
                                 <li>
                                     <a class="checkout" href="{% url 'view_cart' %}">
                                         <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                        {% if product_count > 0 %}
-                                            <label class="badge badge-warning">{{ product_count }}</label>
-                                        {% endif %}
+                                        <label class="badge badge-warning">{{ product_count }}</label>
                                     </a>
                                 </li>
                                 
@@ -191,7 +193,7 @@
 		</span>
 	</div>
  
-    <!--JS imports-->
+    <!--JS imports -->
     <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/popper.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
@@ -201,14 +203,23 @@
     <script type="text/javascript" src="{% static 'js/categories_custom.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/isotope.pkgd.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/jquery-ui.js' %}"></script>
-
     <script>
     $(document).ready(function() {
         $('.carousel').carousel({
         interval: 5000
         })
      }); 
-
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 59.328817, lng: 18.070426},
+          zoom: 18
+        });
+      }
     </script>
+     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCN3SEC4Pmslb4WiZfVr0dxZFAqrvzHpSw&callback=initMap"
+    async defer></script>
+
+    
 </body>
 </html>

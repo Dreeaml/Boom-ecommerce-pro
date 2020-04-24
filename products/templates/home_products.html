@@ -4,21 +4,21 @@
 
 
 {% block content %}
- 
+ <!-- Carousel -->
     <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
 
             <div class="carousel-item active">
-                <img class="d-block w-100" style="max-height:560px;" src="{% static 'img/carousel/carousel_1.jpeg' %}" alt="First slide">
+                <img class="d-block w-100" style="max-height:560px;" src="/static/img/carousel/carousel_1.jpeg" alt="First slide">
             </div>
             <div class="carousel-item">
-                <img class="d-block w-100" style="max-height:560px;" src="{% static 'img/carousel/carousel_2.jpeg' %}" alt="Second slide">
+                <img class="d-block w-100" style="max-height:560px;" src="/static/img/carousel/carousel_2.jpeg" alt="Second slide">
             </div>
             <div class="carousel-item ">
-                <img class="d-block w-100" style="max-height:560px;" src="{% static 'img/carousel/carousel_4.jpeg' %}" alt="F slide">
+                <img class="d-block w-100" style="max-height:560px;" src="/static/img/carousel/carousel_4.jpeg" alt="F slide">
             </div>
             <div class="carousel-item ">
-                <img class="d-block w-100" style="max-height:560px;" src="{% static 'img/carousel/carousel_3.jpeg' %}" alt="Third slide">
+                <img class="d-block w-100" style="max-height:560px;" src="/static/img/carousel/carousel_3.jpeg" alt="Third slide">
             </div>
             
         </div>
@@ -80,14 +80,15 @@
                                 <div class="product_image">
                                     <img src="{{ MEDIA_URL }}{{ product.image }}" alt="">
                                 </div>
-                                <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-$20</span></div>
                                 <div class="product_info">
                                     <h6 class="product_name"><a href = "{% url 'product_detail' product.id %}">{{ product.name }}</a></h6>
                                     <div class="product_price">{{ product.price }}</div>
                                 </div>
                             </div>
-                            <div class="red_button add_to_cart_button">
-                                <a href="{% url 'product_detail' product.id %}">add to cart</a>
+                            <div>
+                                <button class="red_button add_to_cart_button" type="submit">
+                                    <a href = "{% url 'product_detail' product.id %}">View More</a>
+                                </button>
                             </div>
 						</div>
                         {% endfor %}    

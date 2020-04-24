@@ -1,59 +1,82 @@
-from django.shortcuts import render, get_object_or_404, redirect, reverse
-from django.contrib.auth.decorators import login_required
-from django.contrib import messages
-from .forms import MakePaymentForm, OrderForm
-from .models import OrderLineItem
-from django.conf import settings
-from django.utils import timezone
+from django.shortcuts import render, get_object_or_404, redirect, reverse, HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 from products.models import Product
+from django.contrib.auth.decorators import login_required
+from django.conf import settings
 import stripe
 
+
 # Create your views here.
-stripe.api_key = settings.STRIPE_SECRET
+endpoint_secret = settings.endpoint_secret
 
 @login_required()
 def checkout(request):
-    if request.method == 'POST':
-        order_form = OrderForm(request.POST)
-        payment_form = MakePaymentForm(request.POST)
+    stripe.api_key = settings.STRIPE_SECRET
+    cart = request.session.get('shopping_cart', {})
+    request.session['shopping_cart'] = {}
+ 
+    line_items = []
+    for id, product in cart.items():
+        product = get_object_or_404(Product, pk=id)
+        line_items.append({
+            'name' : product.name,
+            'amount': 1099,
+            'currency' : 'sek',
+            'quantity' : cart[id]['quantity']
+        })
+      
+    session = stripe.checkout.Session.create(
+        payment_method_types=['card'],
+        line_items=line_items,
+        success_url=request.build_absolute_uri(reverse(checkout_success)),
+        cancel_url=request.build_absolute_uri(reverse(checkout_cancelled)),
+    )
+    print(settings.STRIPE_PUBLISHABLE)  
+    return render(request, 'checkout.html',
+        {'session_id' : session.id,
+        'public_key' : settings.STRIPE_PUBLISHABLE
+    })
 
-        if order_form.is_valid() and payment_form.is_valid():
-            order = order_form.save(commit=False)
-            order.date = timezone.now()
-            order.save()
+@login_required
+def checkout_success(request):
+    request.session['shopping_cart'] = {}
+    return render(request, 'thankyou.html')
 
-            cart = request.session.get('cart', {})
-            total = 0
-            for id, quantity in cart.items():
-                product = get_object_or_404(Product, pk=id)
-                order_line_item = OrderLineItem(
-                    order = order,
-                    product = product,
-                    quantity = quantity
-                )
-            order_line_item.save()
+@login_required
+def checkout_cancelled(request):
+    all_products = Product.objects.all()
+    min_price=1
+    max_price=99
+    
+    return render(request, 'all_products.html', {
+        'all_products':all_products,
+        'min_price':min_price,
+        'max_price':max_price
+    })
+  
+  
+@login_required   
+@csrf_exempt
+def payment_completed(request):
+    payload = request.body
+    sig_header = request.META['HTTP_STRIPE_SIGNATURE']
+    event = None
+    
+    try:
+        event = stripe.Webhook.construct_event(
+            payload, sig_header, endpoint_secret
+        )
+    except ValueError as e:
+        return HttpResponse(status=400)
+    except stripe.error.SignatureVerificationError as e:
+        return HttpResponse(status=400)
+        
+    if event['type'] == 'checkout.session.completed':
+        session =event['data']['object']
+        
+        handle_checkout_session(session)
+    
+    return HttpResponse(status=200)
 
-            try:
-                customer = stripe.Charge.create(
-                    amount = int(total * 100),
-                    currency = "EUR",
-                    description = request.user.email,
-                    card = payment_form.cleaned_data['stripe_id']
-                )
-            except stripe.error.CardError:
-                messages.error(request, "Your card was declined")
-            
-            if customer.paid:
-                messages.error(request, "You have successfully paid")
-                request.session['cart'] = {}
-                return redirect(reverse('products'))
-            else: 
-                messages.error(request, "Unable to take payment")
-        else: 
-            print(payment_form.errors)
-            messages.error(request, "We are unable to take a payment with that card!")
-    else: 
-        payment_form = MakePaymentForm()
-        order_form = OrderForm()
-
-    return render(request, 'checkout.html', {'order_form': order_form, 'payment_form': payment_form, 'publishable': settings.STRIPE_PUBLISHABLE})
+def handle_checkout_session(session):
+     print(session)
