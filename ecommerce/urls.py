@@ -18,7 +18,7 @@ from django.contrib import admin
 from accounts import urls as urls_accounts
 from products import urls as urls_products
 from cart import urls as urls_cart
-from search import urls as urls_search
+from search.views import search
 from checkout import urls as urls_checkout
 from products.views import home_products
 from sendemail import urls as urls_sendemail
@@ -31,7 +31,7 @@ urlpatterns = [
     url(r'^accounts/', include(urls_accounts)),
     url(r'^products/', include(urls_products)),
     url(r'^cart/', include(urls_cart)),
-    url(r'^search/', include(urls_search)),
+    url(r'^search/', search, name='search'),
     url(r'^checkout/', include(urls_checkout)),
     url(r'^sendemail/', include(urls_sendemail)),
     url(r'^media/(?P<path>.*)$', static.serve, {'document_root': MEDIA_ROOT}),

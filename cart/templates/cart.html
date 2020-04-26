@@ -1,34 +1,13 @@
 <!DOCTYPE html>
 {% extends 'base.html' %}
-{% load static from staticfiles %}
+{% load static %}
 {% load bootstrap_tags %}
 
-<!-- {% if cart_items %}
-    End feature cards in cart -->
-    <!-- Empty cart 
-    <div class="mb-4" style="margin-left: auto;margin-right: auto">
-        <div class="card shadow h-100 py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mt-2 mr-2">
-                        <div class="align-items-center">
-                            <img class="attachment" alt="empty cart" src="{ media/images/empty-cart.PNG }">
-                        </div>
-                        <div class="text-xs text-center font-weight-bold text-primary mb-1">
-                            <p>Looks like you haven't got anything in your cart just yet. </p>
-                             <button type="button" class="btn btn-default">
-                                <a href="{% url 'index' %}">Go back to shopping</a>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    {% endif %}
-</div>-->
 
 {% block content %}
+    <br>
+    <br>
+
     <!-- Breadcrumbs -->
     <div class="breadcrumbs d-flex flex-row align-items-center">
         <ul>
@@ -40,7 +19,8 @@
     <table class="table">
         <thead>
             <tr>
-                <th></th>    
+                <th></th>  
+                <th class="product-thumbnail">Image</th>  
                 <th>Product</th>    
                 <th>Quantity</th>    
                 <th>Price</th>
@@ -49,33 +29,38 @@
             </tr>
         </thead>
         <tbody>
-            
             {% for id,product in shopping_cart.items %}
             <tr>
-                <td><img width="150" height="75" src="{{MEDIA_URL}}{{item.image}}"/></td>    
+                <!--<td><img width="150" height="75" src="{{MEDIA_URL}}{{product.image}}"/></td>  -->  
+                <td><img width="150" height="75" src="{{ product.image }}" alt="Image" class="img-fluid"></td>
+                <td class="product-thumbnail">
+                    {% if product.image %}
+                        <img width="150" height="75" src="{{product.image}}" alt="Image" class="img-fluid">
+                    {%endif%}
+                </td>
                 <td>{{ product.name }}</td>    
                 <td>{{ product.quantity}}</td>    
                 <td>€{{ product.price }}</td>
                 <td>€{{ product.subtotal}}</td>
-                <td><a href="#" class="btn btn-secondary height-auto btn-sm">X</a></td>
+                <td><a href="{% url 'cartapp:remove_from_cart' product.product_id %}" class="btn btn-secondary height-auto btn-sm">X</a></td>
             </tr>
             {% endfor %}
 
             
-            <tr>
+            <tr style="background-color:#a8a8a84f">
                 <td></td>
                 <td></td>
                 <td></td>
-                <td><strong>Total:</strong></td>
-                <td><strong>€{{total}}</strong></td>
+                <td ><strong>Total:</strong></td>
+                <td ><strong>€{{total}}</strong></td>
                 <td></td>
             </tr>
             <tr>
                 <td></td>
                 <td></td>
                 <td></td>
-                <td><strong><button class="red_button btn btn-sm btn-block" onclick="window.location='{% url 'all_products' %}'">Continue Shopping</button></strong></td>
-                <td><strong><button class="red_button btn btn-sm btn-block" style="background-color:#27aa27d4;" onclick="window.location='{% url 'checkout' %}'">Proceed to checkout</button></strong></td>
+                <td><strong><button class="btn btn-sm btn-block" style="background-color: #e4e4e4;border: 2px solid #ff00006e;" onclick="window.location='{% url 'all_products' %}'">Continue Shopping</button></strong></td>
+                <td><strong><button class="btn btn-sm btn-success btn-block" onclick="window.location='{% url 'checkout' %}'">Proceed to checkout</button></strong></td>
                 
             </tr>
         </tbody>

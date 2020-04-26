@@ -35,13 +35,15 @@ def add_to_cart(request, id):
             'name': product.name,
             'price': product.price,
             'quantity':quantity,
-            'image_url':''
+            #'image':'{{MEDIA_URL}}{{item.image}}'
+            'image': '{{product.image}}'
+
         }
         
         # save the cart back to the session under the key 'shopping_cart'
         request.session['shopping_cart'] = cart
         
-        messages.success(request, 'Socks added to your cart!')
+        messages.success(request, 'Product added to your cart!')
         return redirect('all_products')
     else:
         cart[id]['quantity']+=1
@@ -54,9 +56,11 @@ def remove_from_cart(request, id):
     # Remove the products specified by the products_id argument to cart
     if id in cart:
         del cart[id]
-        request.session['shopping_cart'] = cart
     
-    return redirect('view_cart')
+    request.session['shopping_cart'] = cart
+    #return redirect('view_cart')
+    return redirect('cart')
+
 
 def back_to_shop(request, id):
     """return to products.html to keep shopping"""
