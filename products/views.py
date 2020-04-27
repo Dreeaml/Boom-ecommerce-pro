@@ -31,3 +31,6 @@ def product_detail(request, id):
 
 def coming_soon(request):
     return render(request, 'coming_soon.html')
+
+def faq(request):
+    return render(request, 'faq.html')

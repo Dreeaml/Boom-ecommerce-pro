@@ -4,12 +4,15 @@
 {% load static %} 
 
 {% block content %}
-
-    <div class="container">
-        <div class="col-md-12 text-center border-bottom mb-5 pt-5">
-            <h2 class="text-black h4 text-uppercase">FAQ</h2>
+<div class="main_slider">
+    <div class="container fill_height">
+        <!-- Breadcrumbs -->
+        <div class="breadcrumbs d-flex flex-row align-items-center">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>FAQ</a></li>
+            </ul>
         </div>
-
         <!-- FAQ Expand and Collapse Bootstrap Feature -->
         <!-- Privacy Policy extracted from  https://support.gymshark.com -->
         <div id="accordion">
@@ -18,7 +21,7 @@
                 <div class="card-header" id="headingOne">
                     <h5 class="mb-0">
                         <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                Mens size guide
+                MEN'S SIZE GUIDE
                 </button>
                     </h5>
                 </div>
@@ -30,7 +33,6 @@
                     </div>
                 </div>
             </div>
-
 
             <div class="card">
                 <div class="card-header" id="headingTwo">
@@ -48,7 +50,6 @@
                 </div>
             </div>
 
-
             <div class="card">
                 <div class="card-header" id="headingThree">
                     <h5 class="mb-0">
@@ -63,7 +64,6 @@
                     </div>
                 </div>
             </div>
-
             
             <div class="card">
 
@@ -83,8 +83,9 @@
                 </div>
 
             </div>
+
         </div>
     </div>
-
+</div>
 
 {% endblock %}

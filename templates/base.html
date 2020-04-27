@@ -99,6 +99,16 @@
                 </div>
             </div>
         </div>
+        {% if messages %}
+            <div class="alert alert-success">
+                <div class="messages">
+                    {% for message in messages %}
+                        {{ message }}
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+            
     </div>
 	</header>
     <div class="fs_menu_overlay"></div>
@@ -118,7 +128,7 @@
                 </li>
                 <li><a href="{% url 'contact_us' %}">Contact us</a></li>
                 <li><a href="{% url 'coming_soon' %}">Blog</a></li>
-                <li><a href="{% url 'coming_soon' %}">FAQs</a></li>
+                <li><a href="{% url 'faq' %}">FAQs</a></li>
                 <li>
                     <form class="form-inline" action="{% url 'search' %}" method="POST">
                         <div class="input-group">
@@ -134,19 +144,8 @@
 			</ul>
 		</div>
 	</div>
-    
-        {% if messages %}
-            <div class="alert alert-success">
-                <div class="messages">
-                    {% for message in messages %}
-                        {{ message }}
-                    {% endfor %}
-                </div>
-            </div>
-        {% endif %}
-
     {% block content %} 
-            
+    
     {% endblock %}
     <br>
 	<!-- Footer -->
@@ -163,7 +162,7 @@
                         <div class="col-sm-6 ">
                             <ul class="footer_nav">
                                 <li><a href="{% url 'coming_soon' %}">Blog</a></li>
-                                <li><a href="{% url 'coming_soon' %}">FAQs</a></li>
+                                <li><a href="{% url 'faq' %}">FAQs</a></li>
                                 <li><a href="{% url 'contact_us' %}">Contact us</a></li>
                             </ul>
                         </div>
