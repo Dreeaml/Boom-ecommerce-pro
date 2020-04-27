@@ -46,15 +46,14 @@ def checkout(request):
 @login_required
 def checkout_success(request):
     request.session['shopping_cart'] = {}
-    return render(request, 'thankyou.html')
+    return render(request, 'checkout/thankyou.html')
 
 @login_required
 def checkout_cancelled(request):
-    all_products = Product.objects.all()
-    
-    return render(reverse, 'all_products.html', {
-        'all_products':all_products
-    })
+    #all_products = Product.objects.all()
+    return redirect(reverse('all_products'))
+    #return render(request, 'all_products'
+        #, {'all_products':all_products})
     
 @login_required   
 @csrf_exempt
