@@ -36,6 +36,7 @@ ALLOWED_HOSTS = ['8080-e682ad67-7e2b-4861-936a-5bcc6d23827a.ws-eu01.gitpod.io', 
 # Application definition
 
 INSTALLED_APPS = [
+    
     'sendemail.apps.SendemailConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -177,7 +178,7 @@ EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'boomentrepreneurship@gmail.com'
-EMAIL_HOST_PASSWORD = os.getenv('GMAIL_PASSWORD')
+EMAIL_HOST_PASSWORD = 'BoomLuces*'
 
 #EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
