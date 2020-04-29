@@ -1,4 +1,6 @@
 ## BOOM E-commerce
+[![Build Status](https://travis-ci.org/Dreeaml/Boom-ecommerce.svg?branch=master)](https://travis-ci.org/Dreeaml/Boom-ecommerce)
+
 BOOM is an e-commerce specialized in sports clothes and workout light equipment such as resistance bands, yoga balls, dumbbells, and many others.
 
 BOOM is targeting both women and men of all ages and sizes. We want to cultivate equality, integration and build a new health and well being community. 
@@ -82,7 +84,9 @@ Finally, a Google Maps API is in place with the coordinates of our "central offi
 - Create a workout app as a complement for a rich experience.
 - Include more pictures per product.
 - Include a stock level to know how many have been sold and when a new order needs to be placed to maintain a safety stock.
--Tests
+- Develop Contact form and reset password functonality
+- Tests
+
 
 ## Technologies Used
 Technologies Used
@@ -192,6 +196,6 @@ The photos and gifs used in this site were obtained from [Abode Stock](https://s
 ### Acknowledgements
 I received inspiration for this project from [Gymshark](https://se.gymshark.com/), [SOXS](https://github.com/Code-Institute-Submissions/SOXS_Store), and other inspiring projects from [Code Institute](https://codeinstitute.net/).
 
-The Styling of the webpage is customized from a (Colorlib](https://colorlib.com/) open-source template.
+The Styling of the webpage is customized from a [Colorlib](https://colorlib.com/) open-source template.
 ### Special thanks to
 Code institute team, mentor, tutors, Slack community for helping me to tackle project issues.
