@@ -6,29 +6,6 @@ from .forms import ContactForm
 from django.contrib import messages
 from .contact_email import AutoMail
 
-'''def contact_us(request):
-    if request.method == 'GET':
-        form = ContactForm()
-    else:
-        form = ContactForm(request.POST)
-        if form.is_valid():
-            print('form is valid')
-            subject = form.cleaned_data['subject']
-            email = form.cleaned_data['email']
-            message = form.cleaned_data['message']
-            try:
-                AutoMail.contact_us('','','')
-            except BadHeaderError:
-                return HttpResponse('Invalid header found.')
-            except:
-                raise
-            return redirect('email_success')
-    return render(request, "contact_us.html", {'form': form})
-
-def successView(request):
-    messages.success(request, "Thanks for your message!")
-    return render(request, "contact_us.html")'''
-
 def contact_us(request):
     if request.method == 'GET':
         form = ContactForm()
@@ -40,7 +17,6 @@ def contact_us(request):
             email = form.cleaned_data['email']
             message = form.cleaned_data['message']
             try:
-                #send_mail(subject, message, from_email, ['boomentrepreneurship@gmail.com'])
                 AutoMail.contact_us('','','')
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
