@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
-from .models import Product
+from .models import Category, Product, Size, Color, Stock
 from django.core.paginator import Paginator
 from .forms import ProductsSearch
        
